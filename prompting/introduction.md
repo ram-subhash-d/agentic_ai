@@ -1,7 +1,13 @@
+There are 2 kinds of prompts
+* System prompt : This prompt is given by the developer to the LLM. Setting up the context, role and limits of the LLM for that agent.
+* User prompt : This is the prompt given by the end user of the agent, passed to the LLM. These can be any questions being asked while the agent is being used.  
+
+Both the prompts contain components which are discussed below.
+
 # Prompt components
 We can break the prompt into 3 components to make it structured and get the expected answers.
-* Instruction : A specific task or instruction you want the model to perform
-* Context : External information or additional context that can steer the model to better responses
+* Instruction : Tell the model how to answer the questions.
+* Context : External information or additional context that can steer the model to better responses. Context can come from vector databases.
 * Input data : The input or question that we are insterested to find a response for.  
 
 **Example:**  
@@ -11,16 +17,18 @@ Teplizumab traces its roots to a New jersey drug company called Ortho Pharmaceut
 
 What was OKT3 originally sourced from?
 
-Context comes from the vector database. Instructions is telling the model how to answer the questions.
-
-# LLM's use text completion scheme
-The LLM will try to expect the next few characters and try to complete the sentance. For example we can tell the model in the user prompt, what you are expecting from it, then give the text, the model will complete it with a answer. We can specify the desired format in instructions, when tell it what we are expecting form it. It is good to start a conversation with instructions, as these model are trained to follow instructions, it is called instruction tuning.
+There is another well known structure, that breaks the prompt into 5 components, known as the CRAFT structure.
+* Context : Background information and what is the situation.
+* Role : Person or expertise, who is the LLM, what assitant.
+* Action : Specific task to be performed, what to do.
+* Format : Output structure, what should it look like.
+* Target audience : Who comsume the output, tone and vacabulary.
 
 # Zero shot, one shot and few shot
 Shot here is like a example.
 * Zero shot : In the above example, we have given the plain instructions, along with the context and question, this is know as zero shot.
 * One shot : Sometime times the tasks are complex enough, that it is not able to follow the plain instructions, we have to supply it a example, this is called one shot.
-* Few shot : Here we suppy more than one example, a few of them, to get better responses.
+* Few shot : Here we suppy more than one example, a few of them, for more complex tasks, to get better responses.
 
 **Example:**  
 Classify the test into neutral, negative or positive  
@@ -49,7 +57,7 @@ A: The answer is 27 (which is wrong)
 **Model input**  
 Q: Roger has 5 tennis balls. He buys 2 more cans of tennis balls. Each can has 3 tennis balls. How many tennis balls does he have now?  
 
-A: Roger started with 5 balls. 2 cans os 3 tennis balls each is 6 tennis balls. 5 + 6 = 11. The answer is 11.
+A: Roger started with 5 balls. 2 cans of 3 tennis balls each is 6 tennis balls. 5 + 6 = 11. The answer is 11.
 
 Q: The cafeteria had 23 apples. If they used 20 to make lunch and bought 6 more, how many apples do they have?
 
@@ -78,3 +86,5 @@ Obs 3: Front Row is a discontinued media center software...
 
 Thought 4: Front Row (software) is controlled by an Apple Remote or the keyboard function keys. So the answer is keyboard function keys.
 Act 4: Finish[keyboard function keys]
+
+These iterations are planned and execute by the LLM behind the scenes.
